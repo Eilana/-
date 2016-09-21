@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+			background-color: gray;
+			text-align: center;
+		}	
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var cvs = document.querySelector("#cvs");
+			cvs.width=1500;
+			cvs.height=1800;
+			cvs.style.background='#fff';
+			var ctx = cvs.getContext('2d');
+			var stap_x=150;
+			var stap_y=150;
+			function func (x0,y0,x,y){
+				ctx.beginPath();
+				ctx.moveTo(x0,y0);
+				ctx.lineTo(x,y);
+				ctx.stroke();
+				ctx.closePath();
+			}
+			function fillText(font,text,x,y){
+				ctx.font=font;
+				// ctx.fillStyle=color;
+				ctx.fillText(text, x,y);		
+				ctx.closePath();
+			}
+			function qizi(text,x0,y0,color){
+				ctx.beginPath();
+				ctx.moveTo(x0, y0);
+				ctx.arc(x0,y0,80,0,2*Math.PI,false);
+				ctx.fillStyle="#9D805D";
+				ctx.fill();
+				ctx.font='bold 100px Arial';
+				ctx.strokeStyle=color;
+				ctx.strokeText(text, x0-50,y0+30);			
+				ctx.closePath();
+			}
+			for(var i=1; i<10;i++){
+				func(i*stap_x,150,i*stap_x,750);
+				func(i*stap_x,900,i*stap_x,1500);
+			}
+			for(var i=1; i<6;i++){
+				func(150,i*stap_y,1350,i*stap_y);
+				func(150,(i+5)*stap_y,1350,(i+5)*stap_y);
+			}
+			func(600,150,900,450);
+			func(900,150,600,450);
+			func(150,750,150,900);
+			func(1350,750,1350,900);
+			func(600,1200,900,1500);
+			func(900,1200,600,1500);
+			fillText('bold 50px Arial','楚河',400,825);
+			fillText('bold 50px Arial','汉界',1000,825);
+			var aRed=['車','马','相','士','帅','士','相','马','車','炮','炮','兵','兵','兵','兵','兵'];
+			var aGreen=['車','馬','象','士','将','士','象','馬','車','炮','炮','卒','卒','卒','卒','卒'];
+			for (var i = 0; i < aRed.length; i++) {
+				if (i<9) {
+					qizi(aRed[i],150*(i+1),150,'red');
+					qizi(aGreen[i],150*(i+1),1500,'green');
+				} else if(i<11) {
+					qizi(aRed[i],300+(i-9)*6*150,450,'red');
+					qizi(aRed[i],300+(i-9)*6*150,1200,'green');
+				} else {
+					qizi(aRed[i],150+(i-11)*300,600,'red');
+					qizi(aRed[i],150+(i-11)*300,1050,'green');
+				}			
+			}
+		}
+	</script>
+</head>
+<body>
+	<canvas id="cvs">
+		你的浏览器不支持canvas标签，可以升级浏览器进行支持
+	</canvas>
+
+	
+</body>
+</html>
